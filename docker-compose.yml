@@ -1,17 +1,12 @@
 version: '3'
 services:
-
-  # frontend web server
-  web:
+  app:
     build:
       context: .
-      dockerfile: Dockerfile-web
+      dockerfile: Dockerfile-devel
     ports:
-      - "8080:80"
+      - "8080:8080"
     volumes:
-      - ./:/code:ro
-
-  # database server
-  db:
-    image: "postgres:latest"
-
+      - ./:/code:rw
+    environment:
+      DJANGO_MODE: devel # look at os.environ['DJANGO_MODE'] to detect deployment
